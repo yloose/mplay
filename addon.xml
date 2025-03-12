@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addon id="plugin.program.mplay"
+<addon id="context.program.mplay"
        name="mplay"
        version="0.0.1"
        provider-name="yloose"
