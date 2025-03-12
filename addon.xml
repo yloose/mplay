@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addon id="plugin.program.mplay"
+       name="mplay"
+       version="0.0.1"
+       provider-name="yloose"
+>
+    <requires>
+        <import addon="xbmc.python" version="3.0.0"/>
+        <import addon="script.module.urllib3" version="2.2.3"/>
+    </requires>
+
+    <extension point="kodi.context.item">
+        <menu id="kodi.core.main">
+            <item library="mplay.py">
+                <label>Play from Mediathek</label>
+                <visible>Window.IsVisible(tvguide)|Window.IsVisible(tvsearch)</visible>
+            </item>
+        </menu>
+    </extension>
+
+    <extension point="xbmc.addon.metadata">
+		  <summary lang="en_US">Play content directly from the epg.</summary>
+		  <description lang="en_US">Empty</description>
+		  <language></language>
+		  <platform>all</platform>
+	  </extension>
+</addon>
