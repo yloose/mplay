@@ -73,9 +73,9 @@ def find_program(title, channel_name, description=None, date=None):
         # Filter description for first eight words
         sanitized_description = " ".join(re.sub("[.,]", "", description).split(" ")[:8])
         query = build_query(title, channel=channel, description=sanitized_description)
-        pgms2 = perform_request(query)
-        if pgms2:
-            pgms = pgms2
+        pgmsDescriptionFilter = perform_request(query)
+        if pgmsDescriptionFilter:
+            pgms = pgmsDescriptionFilter
 
     # Check if there is a program with exact matching date
     if len(pgms) > 10 and date:
@@ -83,5 +83,10 @@ def find_program(title, channel_name, description=None, date=None):
             if datetime.fromtimestamp(pgm["timestamp"]) == date:
                 pgms = [pgm]
                 break
+
+    # Remove programs that are audio descriptions
+    pgmsAudioDescriptionFilter = [pgm for pgm in pgms if "Audiodeskription" not in pgm["title"]]
+    if len(pgmsAudioDescriptionFilter) != 0:
+        pgms = pgmsAudioDescriptionFilter
 
     return pgms[:10]
