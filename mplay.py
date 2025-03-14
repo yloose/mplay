@@ -35,7 +35,7 @@ if __name__ == "__main__":
             play_program(pgms[0]) 
         else:
             selection = xbmcgui.Dialog().select("Please select a program", [f"{pgm["channel"]} | {pgm["topic"]} {pgm["title"]}" for pgm in pgms], preselect=0)
-            if selection > 0:
+            if selection >= 0:
                 play_program(pgms[selection])
 
     except Exception as e:

@@ -15,7 +15,7 @@
           { buildKodiAddon, urllib3, lib, ... }: buildKodiAddon {
             pname = "mplay";
             namespace = "plugin.program.mplay";
-            version = "0.0.1";
+            version = "0.0.2";
 
             propagatedBuildInputs = [
               urllib3
