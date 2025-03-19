@@ -29,6 +29,7 @@
       <source>https://github.com/yloose/mplay</source>
       <assets>
         <icon>resources/assets/logo.png</icon>
+        <screenshot>resources/assets/screenshot-1.jpg</screenshot>
       </assets>
 	  </extension>
 </addon>
