@@ -1,34 +1,24 @@
 import re
+import os
 import json
 import xbmc
 import urllib3
+import xbmcvfs
+import xbmcaddon
 from datetime import datetime
 
 API_URL = "https://mediathekviewweb.de/api/query" 
 
 http = urllib3.PoolManager()
 
-channel_mappings = {
-    "Das Erste HD": "ARD",
-    "ZDF HD": "ZDF",
-    "3sat": "3Sat",
-    "ZDFneo HD": "ZDF",
-    "one HD": "ARD",
-    "ZDFinfo HD": "ZDF",
-    "ARD-alpha": "ARD-alpha",
-    "phoenix": "PHOENIX",
-    "ARTE HD": "ARTE.DE",
-    "KiKA": "KiKA",
-    "WDR HD": "WDR",
-    "NDR Niedersachen HD": "NDR",
-    "BR Fernsehen Süd HD": "BR",
-    "SWR Baden-Württemberg HD": "SWR",
-    "SR Fernsehen HD": "SR",
-    "hr-fernsehen": "HR",
-    "MDR Sachsen-Anhalt HD": "MDR",
-    "rbb Berlin HD": "RBB",
-    "Radio Bremen TV HD": "Radio Bremen TV",
-}
+def get_channel_mappings():
+    with open(os.path.join(xbmcvfs.translatePath(xbmcaddon.Addon().getAddonInfo("profile")), "channel_mappings.json")) as f:
+        try:
+            return json.loads(f.read())
+        except Exception as e:
+            xbmc.log(f"Could not read channel mappings file: {str(e)}", 2)
+            return {}
+
 
 def build_query(title, channel=None, description=None):
     return json.dumps({
@@ -58,7 +48,7 @@ def perform_request(query):
         raise Exception("MediathekView request failed.")
 
 def find_program(title, channel_name, description=None, date=None):
-    channel = channel_mappings.get(channel_name, None) 
+    channel = get_channel_mappings().get(channel_name, None) 
     query = build_query(title, channel=channel)
     pgms = perform_request(query)
 

@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -11,31 +11,46 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        mplayBuilder = kodi: kodi.packages.callPackage (
+        mplayVersion = "0.0.2";
+        mplayBuilder = kodiPackages: kodiPackages.callPackage (
           { buildKodiAddon, urllib3, lib, ... }: buildKodiAddon {
             pname = "mplay";
-            namespace = "plugin.program.mplay";
-            version = "0.0.2";
+            namespace = "context.program.mplay";
+            version = mplayVersion;
 
             propagatedBuildInputs = [
               urllib3
             ];
 
-            passthru = {
-              pythonPath = with kodi.pythonPackages; makePythonPath [ levenshtein ];
-            };
-
             src = ./.;
           }
         ) { };
       in rec {
-        packages.mplay = mplayBuilder pkgs.kodi-wayland;
+        # Package mplay as a zip file for distribution
+        packages.mplayBundle = pkgs.stdenv.mkDerivation {
+          name = "mplayBundle";
+          version = mplayVersion;
+
+          nativeBuildInputs = [ pkgs.zip ];
+
+          # Only zip necessary content
+          buildPhase = ''
+            mkdir -p $out
+            zip -r $out/mplay-${mplayVersion}.zip addon.xml src resources
+          '';
+
+          src = ./.;
+        };
+        # Build the addon using the default buildKodiAddon function
+        packages.mplay = mplayBuilder pkgs.kodi-wayland.packages;
         packages.default = packages.mplay;
         
+        # Provide kodi app with the addon installed for testing
+        # Use $ nix run
         apps.default = let
           kodi = pkgs.kodi-wayland.withPackages (kodiPkgs: [
             kodiPkgs.pvr-iptvsimple
-            (mplayBuilder pkgs.kodi-wayland)
+            (mplayBuilder kodiPkgs)
           ]);
         in {
           type = "app";
@@ -45,6 +60,7 @@
           '');
         };
 
+        # Provide available python dependencies in shell
         devShells.default = pkgs.mkShell {
           packages = with pkgs; [
             (python3.withPackages (ps: [ ps.urllib3 ]))

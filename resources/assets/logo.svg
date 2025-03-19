@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="28.802855mm"
+   height="10.331249mm"
+   viewBox="0 0 28.802855 10.331249"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1">
+    <rect
+       x="70.745758"
+       y="40.205238"
+       width="68.544464"
+       height="24.430153"
+       id="rect2" />
+  </defs>
+  <g
+     id="layer1"
+     transform="translate(-6.0213122,-7.2931144)">
+    <path
+       id="path2-5"
+       style="opacity:0.784778;fill:#000000;fill-opacity:1;stroke-width:0;stroke-dasharray:none"
+       d="m 17.626687,13.406285 -7.01381,4.071491 A 1.0882021,1.0941322 0 0 1 8.9805731,16.530229 V 8.3872466 A 1.0882021,1.0941322 0 0 1 10.612877,7.4397003 l 7.01381,4.0714917 a 1.0882023,1.0941324 0 0 1 0,1.895093 z" />
+    <path
+       id="path2"
+       style="fill:#1a1a1a;stroke-width:0;stroke-dasharray:none"
+       d="M 14.667423,13.406285 7.6536155,17.477776 A 1.0882021,1.0941322 0 0 1 6.0213122,16.530229 V 8.3872467 A 1.0882021,1.0941322 0 0 1 7.6536155,7.4397004 l 7.0138075,4.0714906 a 1.0882023,1.0941324 0 0 1 0,1.895094 z" />
+    <text
+       xml:space="preserve"
+       transform="matrix(0.26458333,0,0,0.26458333,-0.52916663,-1.4215514)"
+       id="text2"
+       style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:20px;font-family:Sans;-inkscape-font-specification:'Sans, Bold Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;letter-spacing:-1.44px;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect2);opacity:0.784778;fill:#1a1a1a;fill-opacity:1;stroke-width:0;stroke-dasharray:none"><tspan
+         x="70.746094"
+         y="57.900391"
+         id="tspan2">mplay</tspan></text>
+  </g>
+</svg>

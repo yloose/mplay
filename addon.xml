@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <addon id="context.program.mplay"
-       name="mplay"
-       version="0.0.1"
+       name="Mediathek Play"
+       version="0.0.2"
        provider-name="yloose"
 >
     <requires>
@@ -9,9 +9,11 @@
         <import addon="script.module.urllib3" version="2.2.3"/>
     </requires>
 
+    <extension point="xbmc.service" library="src/init.py" />
+
     <extension point="kodi.context.item">
         <menu id="kodi.core.main">
-            <item library="mplay.py">
+          <item library="src/mplay.py">
                 <label>Play from Mediathek</label>
                 <visible>Window.IsVisible(tvguide)|Window.IsVisible(tvsearch)</visible>
             </item>
@@ -20,8 +22,13 @@
 
     <extension point="xbmc.addon.metadata">
 		  <summary lang="en_US">Play content directly from the epg.</summary>
-		  <description lang="en_US">Empty</description>
+		  <description lang="en_US">Mediathek play allows you to directly stream a program from epg as provided by MediathekViewWeb via a context option. Note that the functionality can depend on the underlying epg data.</description>
 		  <language></language>
 		  <platform>all</platform>
+      <license>GPL-3.0</license>
+      <source>https://github.com/yloose/mplay</source>
+      <assets>
+        <icon>resources/assets/logo.png</icon>
+      </assets>
 	  </extension>
 </addon>
