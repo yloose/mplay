@@ -11,7 +11,7 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        mplayVersion = "0.1.0";
+        mplayVersion = "0.1.1";
         mplayBuilder = kodiPackages: kodiPackages.callPackage (
           { buildKodiAddon, urllib3, lib, ... }: buildKodiAddon {
             pname = "mplay";
