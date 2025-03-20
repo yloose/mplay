@@ -70,7 +70,6 @@ def get_program_by_channel_number_and_date(channel_number, date):
     broadcasts = get_broadcasts_by_channel_id(channel_id)
     
     for bc in broadcasts:
-        # xbmc.log(f"{str(bc["starttime"])} {str(bc["title"])}", 2)
         if datetime.fromisoformat(bc["starttime"]) == date:
             bc_details = get_broadcast_details_by_broadcast_id(bc["broadcastid"])
             return bc | bc_details

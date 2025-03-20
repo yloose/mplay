@@ -8,8 +8,17 @@ from kodi import get_program_by_channel_number_and_date
 from mediathekview import find_program
 
 def play_program(program):
+    url = ""
+    for key in ["url_video_hd", "urL_video", "url_video_low"]:
+        if key in program and program[key] != "":
+            url = program[key]
+            break
+
+    if url == "":
+        raise Exception("Failed to get playback URL of program.")
+
     player = xbmc.Player()
-    player.play(program["url_video_hd"])
+    player.play(url)
 
 if __name__ == "__main__":
     labelTitle = xbmc.getInfoLabel("Listitem.Title")
@@ -29,6 +38,7 @@ if __name__ == "__main__":
             raise Exception("Internal error")
 
         pgms = find_program(f"{program["title"]} {program["episodename"]}", channel, description=program["plot"], date=date)
+
         if len(pgms) == 0:
             xbmcgui.Dialog().notification("Mediathek Play", "No programs found.")
         elif len(pgms) == 1:
