@@ -21,7 +21,7 @@ To use the addon simply select a program in the EPG overview and open the contex
 by pressing "c". Alternatively it is possible to map any key (on a remote for example) to this action. Now you will now be able to select
 the option "Play from Mediathek".
 
-![Screenshot](resources/assets/screenshot-1.jpg)
+![Screenshot showing context menu](resources/assets/screenshot-1.jpg)
 
 ## Installation
 
