@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <addon id="context.program.mplay"
        name="Mediathek Play"
-       version="0.0.2"
+       version="0.1.0"
        provider-name="yloose"
 >
     <requires>
