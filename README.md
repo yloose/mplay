@@ -1,7 +1,7 @@
 <img src="resources/assets/logo.svg" width="300" />
 
 [![GitHub tag](https://img.shields.io/github/tag/yloose/mplay?include_prereleases=&sort=semver&color=blue)](https://github.com/yloose/mplay/releases/)
-[![License](https://img.shields.io/badge/License-GPL--3-blue)](LICENSE)
+[![License](https://img.shields.io/badge/License-GPL--3-blue)](LICENSE.txt)
 
 Mediathek Play lets you play programs directly from the EPG. It uses [MediathekViewWeb](https://mediathekviewweb.de) to search for the programs
 so it will only work for content indexed there (e.g. German and Austrian public broadcasting channels).
