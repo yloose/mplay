@@ -52,8 +52,6 @@ def find_program(title, channel_name, description=None, date=None):
     query = build_query(title, channel=channel)
     pgms = perform_request(query)
 
-    xbmc.log(str(len(pgms)), 2)
-
     if not pgms:
         query = build_query(title)
         pgms = perform_request(query)
