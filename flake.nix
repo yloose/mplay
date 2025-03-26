@@ -25,7 +25,9 @@
             mkdir -p $out
             sed -e "s/@VERSION@/$(cat ./VERSION)/g" \
                 addon.xml.in > addon.xml
-            zip -r $out/mplay-${mplayVersion}.zip addon.xml src resources
+            mkdir -p context.program.mplay
+            mv addon.xml src resources context.program.mplay
+            zip -r $out/mplay-${mplayVersion}.zip context.program.mplay
           '';
 
           src = ./.;

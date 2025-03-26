@@ -3,8 +3,6 @@ name: "tagged-release"
 
 on:
   push:
-    branches:
-      - "main"
     tags:
       - "v*"
 
@@ -15,12 +13,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: "main"
       - uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: "Update version"
-        run: "VERSION='${{ github.ref_name }}' echo ${VERSION//v} > VERSION"
+        run: "VERSION='${{ github.ref_name }}' bash -c 'echo ${VERSION//v} > VERSION'"
 
       - uses: EndBug/add-and-commit@v9
         with:
