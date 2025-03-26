@@ -37,14 +37,14 @@ if __name__ == "__main__":
         if program is None:
             raise Exception("Internal error")
 
-        pgms = find_program(f"{program["title"]} {program["episodename"]}", channel, description=program["plot"], date=date)
+        pgms = find_program(f'{program["title"]} {program["episodename"]}', channel, description=program["plot"], date=date)
 
         if len(pgms) == 0:
             xbmcgui.Dialog().notification("Mediathek Play", "No programs found.")
         elif len(pgms) == 1:
             play_program(pgms[0]) 
         else:
-            selection = xbmcgui.Dialog().select("Please select a program", [f"{pgm["channel"]} | {pgm["topic"]} {pgm["title"]}" for pgm in pgms], preselect=0)
+            selection = xbmcgui.Dialog().select("Please select a program", [f'{pgm["channel"]} | {pgm["topic"]} {pgm["title"]}' for pgm in pgms], preselect=0)
             if selection >= 0:
                 play_program(pgms[selection])
 

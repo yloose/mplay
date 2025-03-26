@@ -11,23 +11,10 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        mplayVersion = "0.1.1";
-        mplayBuilder = kodiPackages: kodiPackages.callPackage (
-          { buildKodiAddon, urllib3, lib, ... }: buildKodiAddon {
-            pname = "mplay";
-            namespace = "context.program.mplay";
-            version = mplayVersion;
-
-            propagatedBuildInputs = [
-              urllib3
-            ];
-
-            src = ./.;
-          }
-        ) { };
+        lib = pkgs.lib;
+        mplayVersion = lib.removeSuffix "\n" (builtins.readFile ./VERSION);
       in rec {
-        # Package mplay as a zip file for distribution
-        packages.mplayBundle = pkgs.stdenv.mkDerivation {
+        packages.mplay = pkgs.stdenv.mkDerivation {
           name = "mplayBundle";
           version = mplayVersion;
 
@@ -36,13 +23,13 @@
           # Only zip necessary content
           buildPhase = ''
             mkdir -p $out
+            sed -e "s/@VERSION@/$(cat ./VERSION)/g" \
+                addon.xml.in > addon.xml
             zip -r $out/mplay-${mplayVersion}.zip addon.xml src resources
           '';
 
           src = ./.;
         };
-        # Build the addon using the default buildKodiAddon function
-        packages.mplay = mplayBuilder pkgs.kodi-wayland.packages;
         packages.default = packages.mplay;
         
         # Provide kodi app with the addon installed for testing
@@ -50,7 +37,24 @@
         apps.default = let
           kodi = pkgs.kodi-wayland.withPackages (kodiPkgs: [
             kodiPkgs.pvr-iptvsimple
-            (mplayBuilder kodiPkgs)
+            (kodiPkgs.callPackage (
+              { buildKodiAddon, urllib3, lib, unzip, ... }: buildKodiAddon {
+                pname = "mplay";
+                namespace = "context.program.mplay";
+                version = mplayVersion;
+
+                buildInputs = [
+                  unzip
+                ];
+
+                propagatedBuildInputs = [
+                  urllib3
+                ];
+
+                src = packages.mplay + "/mplay-${mplayVersion}.zip";
+                sourceRoot = ".";
+              }
+            ) { })
           ]);
         in {
           type = "app";
