@@ -1,13 +1,14 @@
-import sys
-import json
+import time
 import xbmc
 import xbmcgui
-from datetime import datetime, timedelta
+from datetime import datetime
 from kodi import get_program_by_channel_number_and_date
 
 from mediathekview import find_program
 
 def play_program(program):
+    # Not all programs have hd videos avaiable
+    # so we try all possible streaming urls here
     url = ""
     for key in ["url_video_hd", "urL_video", "url_video_low"]:
         if key in program and program[key] != "":
@@ -25,13 +26,16 @@ if __name__ == "__main__":
     labelDate = xbmc.getInfoLabel("Listitem.Date")
     labelChName = xbmc.getInfoLabel("Listitem.ChannelName")
     labelChNum = xbmc.getInfoLabel('Listitem.ChannelNumberLabel')
-
+    
     title = labelTitle
     channel = labelChName.split(" ")[0]
     channelNum = int(labelChNum)
-    date = datetime.strptime(labelDate, "%d-%m-%Y %H:%M")
 
-    program = get_program_by_channel_number_and_date(channelNum, date - timedelta(hours=1))
+    # Get correct time format
+    date_format = xbmc.getRegion("dateshort")
+    date = datetime(*(time.strptime(labelDate, f"{date_format} %H:%M")[0:6]))
+
+    program = get_program_by_channel_number_and_date(channelNum, date)
 
     try:
         if program is None:

@@ -1,6 +1,6 @@
 import json
 import xbmc
-from datetime import datetime
+from datetime import datetime, timezone
 
 def get_all_channel_groups():
     query = {
@@ -70,6 +70,6 @@ def get_program_by_channel_number_and_date(channel_number, date):
     broadcasts = get_broadcasts_by_channel_id(channel_id)
     
     for bc in broadcasts:
-        if datetime.fromisoformat(bc["starttime"]) == date:
+        if datetime.fromisoformat(bc["starttime"]).replace(tzinfo=timezone.utc) == date.astimezone(timezone.utc):
             bc_details = get_broadcast_details_by_broadcast_id(bc["broadcastid"])
             return bc | bc_details

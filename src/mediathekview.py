@@ -48,15 +48,18 @@ def perform_request(query):
         raise Exception("MediathekView request failed.")
 
 def find_program(title, channel_name, description=None, date=None):
+    # First search with title and channel
     channel = get_channel_mappings().get(channel_name, None) 
+    xbmc.log(f"Searching for program with title {title} and date {date}", xbmc.LOGDEBUG)
     query = build_query(title, channel=channel)
     pgms = perform_request(query)
 
+    # No results for first search => search again only with title
     if not pgms:
         query = build_query(title)
         pgms = perform_request(query)
 
-    # Search again to reduce results
+    # Too many results => search again with description
     if len(pgms) > 10 and description:
         # Filter description for first eight words
         sanitized_description = " ".join(re.sub("[.,]", "", description).split(" ")[:8])
