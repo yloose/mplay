@@ -1,0 +1,46 @@
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgctxt "#32001"
+msgid "Play from Mediathek"
+msgstr ""
+
+msgctxt "#32002"
+msgid "No programs found"
+msgstr ""
+
+msgctxt "#32003"
+msgid "Please select a program"
+msgstr ""
+
+
+# Errors
+
+msgctxt "#32101"
+msgid "Internal error"
+msgstr ""
+
+msgctxt "#32102"
+msgid "Failed to find/play program"
+msgstr ""
+
+msgctxt "#32103"
+msgid "The error encountered was:"
+msgstr ""
+
+msgctxt "#32104"
+msgid "Failed to decode response from MediathekView."
+msgstr ""
+
+msgctxt "#32105"
+msgid "MediathekView request failed."
+msgstr ""
+
+msgctxt "#32106"
+msgid "Failed to find playback URL of program."
+msgstr ""

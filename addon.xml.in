@@ -14,17 +14,19 @@
     <extension point="kodi.context.item">
         <menu id="kodi.core.main">
           <item library="src/mplay.py">
-                <label>Play from Mediathek</label>
+                <label>32001</label>
                 <visible>Window.IsVisible(tvguide)|Window.IsVisible(tvsearch)</visible>
             </item>
         </menu>
     </extension>
 
     <extension point="xbmc.addon.metadata">
-		  <summary lang="en_US">Play content directly from the epg.</summary>
-		  <description lang="en_US">Mediathek play allows you to directly stream a program from epg as provided by MediathekViewWeb via a context option. Note that the functionality can depend on the underlying epg data.</description>
-		  <language></language>
+		  <summary lang="en_GB">Play content directly from the epg.</summary>
+		  <summary lang="de_DE">Mediathek Zugriff über das EPG.</summary>
+		  <description lang="en_GB">Mediathek play allows you to directly stream a program from epg as provided by MediathekViewWeb via a context option. Note that the functionality can depend on the underlying epg data.</description>
+		  <description lang="de_DE">Mit Mediathek Play lassen sich Sendungen aus dem EPG über einen Kontextmenü Eintrag aus der Mediathek abspielen. Hierfür wird MediathekViewWeb benutzt. Beachte, dass die Funktionalität von den unterliegenden EPG Daten abhängen kann.</description>
 		  <platform>all</platform>
+      <language></language>
       <license>GPL-3.0</license>
       <source>https://github.com/yloose/mplay</source>
       <assets>

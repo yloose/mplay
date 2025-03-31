@@ -43,9 +43,9 @@ def perform_request(query):
             data = json.loads(res.data.decode("utf-8"))
             return data["result"]["results"]
         except json.JSONDecodeError:
-            raise Exception("Failed to decode response.")
+            raise Exception(xbmcaddon.Addon().getLocalizedString(32104))
     else:
-        raise Exception("MediathekView request failed.")
+        raise Exception(xbmcaddon.Addon().getLocalizedString(32105))
 
 def find_program(title, channel_name, description=None, date=None):
     # First search with title and channel
